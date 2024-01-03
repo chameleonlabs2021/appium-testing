@@ -1,0 +1,30 @@
+name: Run Android Tests in GitHub Runner
+
+on: push
+
+jobs:
+  run-mobile-test:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout the project
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14' # Specify the Node.js version
+
+      - name: Setup Appium
+        run: |
+          npm install -g appium@v2.0.0
+          appium -v
+
+      - name: Start Appium Server
+        run: appium &>/dev/null &
+
+      - name: Install Android Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: npm run your-test-script # Replace with your test script
