@@ -23,8 +23,15 @@ jobs:
       - name: Start Appium Server
         run: appium &>/dev/null &
 
-      - name: Install Android Emulator
+  instrumentation-test:
+    needs: [unit-test]
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Run espresso tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: npm run test # Replace with your test script
+          script: ./gradlew connectedCheck
