@@ -35,13 +35,19 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Install Gradle 8.2.0
+      - name: Install Gradle 8.2
         run: |
           wget https://services.gradle.org/distributions/gradle-8.2-bin.zip
           unzip -q gradle-8.2-bin.zip
           export GRADLE_HOME=$PWD/gradle-8.2
           export PATH=$GRADLE_HOME/bin:$PATH
           gradle -version
+
+      - name: Update Android Gradle Plugin
+        run: |
+          echo "android.useAndroidX=true" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+          sed -i 's/com.android.tools.build:gradle:8.2.0/com.android.tools.build:gradle:4.2.2/g' build.gradle
 
       - name: Run espresso tests
         uses: reactivecircus/android-emulator-runner@v2
