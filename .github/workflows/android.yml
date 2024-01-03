@@ -38,7 +38,7 @@ jobs:
       - name: Install Gradle 8.2.0
         run: |
           wget https://services.gradle.org/distributions/gradle-8.2-bin.zip
-          unzip -q gradle-8.2.0-bin.zip
+          unzip -q gradle-8.2-bin.zip
           export GRADLE_HOME=$PWD/gradle-8.2.0
           export PATH=$GRADLE_HOME/bin:$PATH
           gradle -version
