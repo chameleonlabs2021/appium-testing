@@ -16,7 +16,6 @@ jobs:
           java-version: '8.0'
           distribution: 'temurin' # Eclipse Temurin is a common distribution
 
-
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -24,7 +23,7 @@ jobs:
 
       - name: Setup Appium
         run: |
-          npm install -g appium@v2.0.0
+          npm install -g appium@2.0.0
           appium -v
 
       - name: Start Appium Server
@@ -35,6 +34,14 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
+
+      - name: Install Gradle 8.2.0
+        run: |
+          wget https://services.gradle.org/distributions/gradle-8.2.0-bin.zip
+          unzip -q gradle-8.2.0-bin.zip
+          export GRADLE_HOME=$PWD/gradle-8.2.0
+          export PATH=$GRADLE_HOME/bin:$PATH
+          gradle -version
 
       - name: Run espresso tests
         uses: reactivecircus/android-emulator-runner@v2
