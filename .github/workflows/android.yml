@@ -22,9 +22,23 @@ jobs:
 
       - name: Start Appium Server
         run: appium &>/dev/null &
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.8'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Assuming you have a requirements.txt
+
+      - name: Run Python test script
+        run: |
+          python test_app.py  # Replace with your Python script
+
 
       - name: Install Android Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          script: npm run your-test-script # Replace with your test script
+          script: npm run test # Replace with your test script
