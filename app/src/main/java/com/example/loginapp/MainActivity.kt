@@ -17,6 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.testTag
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,10 @@ fun Greeting(name: String) {
     Column {
         Text(text = "Hello $name!")
         Text(text = message)
-        Button(onClick = { message = "Button was clicked!" }) {
+        Button(onClick = { message = "Button was clicked!" },
+            modifier = Modifier.testTag("myButtonTag")
+            
+        ) {
             Text("Click Me")
         }
     }
