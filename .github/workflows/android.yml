@@ -43,12 +43,6 @@ jobs:
           export PATH=$GRADLE_HOME/bin:$PATH
           gradle -version
 
-      - name: Update Android Gradle Plugin
-        run: |
-          echo "android.useAndroidX=true" >> gradle.properties
-          echo "android.enableJetifier=true" >> gradle.properties
-          sed -i 's/com.android.tools.build:gradle:8.2.0/com.android.tools.build:gradle:4.2.2/g' build.gradle
-
       - name: Run espresso tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
