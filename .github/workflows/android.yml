@@ -10,10 +10,10 @@ jobs:
       - name: Checkout the project
         uses: actions/checkout@v3
 
-      - name: Set up JDK 8.0 # Closest LTS version to your local JDK
+      - name: Set up JDK 21.0.1 # Closest LTS version to your local JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '8.0'
+          java-version: '21.0.1'
           distribution: 'temurin' # Eclipse Temurin is a common distribution
 
       - name: Install Node.js
